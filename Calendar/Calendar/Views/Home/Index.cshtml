@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    int number = 0;
+}
+
+
+<form method="get" , asp-page="">
+    <input placeholder="mm-dd-yyyy" type="date" class="form-label" id="start" name="start" />
+    To
+    <input placeholder="mm-dd-yyyy" type="date" class="form-label" id="start" name="end" />
+    <br />
+    <select class="col-md-2" id="type" name="type" content="width=device-width, initial-scale=1">
+        <option>Type of Company</option>
+        <option>Saturday-Non-working Company</option>
+        <option>Saturday-Working Company</option>
+    </select>
+    <button class="btn btn-default" type="submit" value="Apply">
+        Button
+    </button>
+</form>
+<hr />
+<table class="table">
+    <tr>
+        <td> #</td>
+        <td> Working-Days</td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(++number)</td>
+            <td>@item</td>
+        </tr>
+    }
+</table>
