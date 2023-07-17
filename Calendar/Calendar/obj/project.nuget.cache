@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WAd6zEi4+YVgHCYgBGTkCxYanQHjSKgyntNIqnDOzhQjStVpYPm/8sO+TbXCcOFROVoI78cEYngiMuMf6tM/RQ==",
+  "dgSpecHash": "SEAnzX3pgDdDCmCQkyxQKKX8e6M9z3stUYuFNJbOBS6z31wVoHStILKSAZhPa/6bo9LtdK6yJQ64HV+MAbbanw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\trgta\\OneDrive\\Desktop\\Calendar\\Calendar\\Calendar.csproj",
+  "projectFilePath": "C:\\Users\\trgta\\OneDrive\\Desktop\\C#\\PP\\Working-Calendar\\Calendar\\Calendar\\Calendar.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\trgta\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\trgta\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",

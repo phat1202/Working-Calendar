@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\trgta\\OneDrive\\Desktop\\Calendar\\Calendar\\Calendar.csproj": {}
+    "C:\\Users\\trgta\\OneDrive\\Desktop\\C#\\PP\\Working-Calendar\\Calendar\\Calendar\\Calendar.csproj": {}
   },
   "projects": {
-    "C:\\Users\\trgta\\OneDrive\\Desktop\\Calendar\\Calendar\\Calendar.csproj": {
+    "C:\\Users\\trgta\\OneDrive\\Desktop\\C#\\PP\\Working-Calendar\\Calendar\\Calendar\\Calendar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\trgta\\OneDrive\\Desktop\\Calendar\\Calendar\\Calendar.csproj",
+        "projectUniqueName": "C:\\Users\\trgta\\OneDrive\\Desktop\\C#\\PP\\Working-Calendar\\Calendar\\Calendar\\Calendar.csproj",
         "projectName": "Calendar",
-        "projectPath": "C:\\Users\\trgta\\OneDrive\\Desktop\\Calendar\\Calendar\\Calendar.csproj",
+        "projectPath": "C:\\Users\\trgta\\OneDrive\\Desktop\\C#\\PP\\Working-Calendar\\Calendar\\Calendar\\Calendar.csproj",
         "packagesPath": "C:\\Users\\trgta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\trgta\\OneDrive\\Desktop\\Calendar\\Calendar\\obj\\",
+        "outputPath": "C:\\Users\\trgta\\OneDrive\\Desktop\\C#\\PP\\Working-Calendar\\Calendar\\Calendar\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\trgta\\AppData\\Roaming\\NuGet\\NuGet.Config",

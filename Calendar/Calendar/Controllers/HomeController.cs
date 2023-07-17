@@ -18,7 +18,7 @@ namespace Calendar.Controllers
             _logger = logger;
         }
         [HttpGet]
-        public IActionResult Index(DateTime start, DateTime end)
+        public IActionResult Index(DateTime start, DateTime end, string type)
         {
             var dates = new List<DateTime>();
             if (end < start)
@@ -27,19 +27,52 @@ namespace Calendar.Controllers
                 return View();
             }
             var daysOff = _context.Holidays.First(d => d.Number != 0).holidays;
+            //lọc cty
+            //if (type == "Saturday-Non-working Company")
+            //{
+
+            //}
+            //theem ngày
+
             for (var dt = start; dt <= end; dt = dt.AddDays(1))
             {
-
-                //if (dt != daysOff)
+                //DayOfWeek weekend = dt.DayOfWeek;
+                //if ((weekend.ToString() == "Sunday") && (weekend.ToString() == "Sunday"))
                 //{
-                //    dates.Add(dt);
+
                 //}
-               dates.Add(dt);
+                if ((dt.DayOfWeek.ToString() != "Sunday") && (dt.DayOfWeek.ToString() != "Saturday"))
+                {
+                    dates.Add(dt);
+                }
+                //dates.Add(dt);
+
+                //if ((dt.DayOfWeek.ToString() == "Sunday") && (dt.DayOfWeek.ToString() == "Saturday"))
+                //{
+                //    dates.Remove(dt);
+                //}
+
+                //foreach (var day in dates)
+                //{
+                //    if ((day.DayOfWeek.ToString() == "Sunday") && (day.DayOfWeek.ToString() == "Saturday"))
+                //    {
+                //        dates.Remove(day);
+                //    }
+                //}
+
+                //dates.Remove(sunday);
             }
 
             var list = new List<DateTime>(dates);
+            //foreach (var day in list)
+            //{
+            //    if ((day.DayOfWeek.ToString() == "Sunday") && (day.DayOfWeek.ToString() == "Saturday"))
+            //    {
+            //        dates.Remove(day);
+            //    }
+            //}
             return View(list);
-            
+
         }
         public IActionResult AddHoliday()
         {
