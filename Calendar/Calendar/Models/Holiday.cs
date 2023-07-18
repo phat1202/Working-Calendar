@@ -9,4 +9,6 @@ namespace Calendar.Models
         [DataType(DataType.Date)]
         public DateTime? holidays {  get; set; }
     }
+
+
 }
