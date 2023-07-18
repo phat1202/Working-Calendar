@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Calendar.Controllers
 {
@@ -21,9 +22,12 @@ namespace Calendar.Controllers
         public IActionResult Index(DateTime start, DateTime end, string type)
         {
             List<DateTime> myDaysOff = new List<DateTime>();
+            myDaysOff.Add(new DateTime(2023, 7, 22));
             myDaysOff.Add(new DateTime(2023, 1, 1));
             myDaysOff.Add(new DateTime(2023, 4, 30));
             myDaysOff.Add(new DateTime(2023, 5, 1));
+            myDaysOff.Add(new DateTime(2023, 9, 2));
+            
             var dates = new List<DateTime>();
             if (end < start)
             {
@@ -45,10 +49,40 @@ namespace Calendar.Controllers
                 }
                 if (type == "Saturday-Non-working Company")
                 {
-                    if ((dt.DayOfWeek.ToString() != "Sunday") && (dt.DayOfWeek.ToString() != "Saturday"))
+                    if ((dt.DayOfWeek.ToString() != "Sunday") || (dt.DayOfWeek.ToString() != "Saturday"))
                     {
-                        
                         dates.Add(dt);
+                        foreach (var dayoff in myDaysOff)
+                        {    
+                            if (dayoff.DayOfWeek.ToString() == "Saturday")
+                            {
+                                var nextday = dayoff.AddDays(1);
+                                if(nextday.DayOfWeek.ToString() == "Sunday")
+                                {
+                                    foreach(var  dayoff2 in myDaysOff)
+                                    {
+                                        if(nextday == dayoff2 )
+                                        {
+                                            var nextdaysOff2 = nextday.AddDays(2);
+                                            dates.Remove(nextdaysOff2);
+                                        }
+                                    }
+                                    dates.Remove(nextday);
+                                }
+                                else
+                                {
+                                    var nextdaysOff = nextday.AddDays(1);
+                                    dates.Remove(nextdaysOff);
+                                }
+                                var rostered_dayOff = dayoff.AddDays(2);
+                                dates.Remove(rostered_dayOff);
+                            }
+                            if(dayoff.DayOfWeek.ToString() == "Sunday")
+                            {
+                                var rostered_dayOff = dayoff.AddDays(1);
+                                dates.Remove(rostered_dayOff);
+                            }
+                        }
                     }
                 }
                 else
@@ -56,6 +90,14 @@ namespace Calendar.Controllers
                     if (dt.DayOfWeek.ToString() != "Sunday")
                     {
                         dates.Add(dt);
+                        foreach (var dayoff in myDaysOff)
+                        {
+                            if (dayoff.DayOfWeek.ToString() == "Sunday")
+                            {
+                                var rostered_dayOff = dayoff.AddDays(1);
+                                dates.Remove(rostered_dayOff);
+                            }
+                        }
                     }
                 }
             }
