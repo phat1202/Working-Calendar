@@ -37,7 +37,7 @@ namespace Calendar.Controllers
             {
                 if (type == "Saturday-Non-working Company")
                 {
-                    if ((dt.DayOfWeek.ToString() != "Sunday") || (dt.DayOfWeek.ToString() != "Saturday"))
+                    if ((dt.DayOfWeek.ToString() != "Sunday") && (dt.DayOfWeek.ToString() != "Saturday"))
                     {
                         dates.Add(dt);
                         foreach (var dayoff in myDaysOff)
