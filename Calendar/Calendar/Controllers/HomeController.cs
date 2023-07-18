@@ -36,17 +36,8 @@ namespace Calendar.Controllers
             }
             var daysOff = _context.Holidays.First(d => d.Number != 0).holidays;
             for (var dt = start; dt <= end; dt = dt.AddDays(1))
-            {              
-                foreach (var date in dates.ToList())
-                {   
-                    foreach (var dayoff in myDaysOff)
-                    {
-                        if (dayoff == date)
-                        {
-                            dates.Remove(dayoff);
-                        }
-                    }
-                }
+            {
+                
                 if (type == "Saturday-Non-working Company")
                 {
                     if ((dt.DayOfWeek.ToString() != "Sunday") || (dt.DayOfWeek.ToString() != "Saturday"))
@@ -100,11 +91,20 @@ namespace Calendar.Controllers
                         }
                     }
                 }
+                foreach (var date in dates.ToList())
+                {
+                    foreach (var dayoff in myDaysOff)
+                    {
+                        if (dayoff.Day == date.Day && dayoff.Month == date.Month)
+                        {
+                            dates.Remove(date);
+
+                        }
+                    }
+                }
             }
-            
             var list = new List<DateTime>(dates);
             return View(list);
-
         }
         public IActionResult AddHoliday()
         {
