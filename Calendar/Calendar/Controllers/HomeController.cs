@@ -20,6 +20,10 @@ namespace Calendar.Controllers
         [HttpGet]
         public IActionResult Index(DateTime start, DateTime end, string type)
         {
+            List<DateTime> myDaysOff = new List<DateTime>();
+            myDaysOff.Add(new DateTime(2023, 1, 1));
+            myDaysOff.Add(new DateTime(2023, 4, 30));
+            myDaysOff.Add(new DateTime(2023, 5, 1));
             var dates = new List<DateTime>();
             if (end < start)
             {
@@ -27,50 +31,36 @@ namespace Calendar.Controllers
                 return View();
             }
             var daysOff = _context.Holidays.First(d => d.Number != 0).holidays;
-            //lọc cty
-            //if (type == "Saturday-Non-working Company")
-            //{
-
-            //}
-            //theem ngày
-
             for (var dt = start; dt <= end; dt = dt.AddDays(1))
-            {
-                //DayOfWeek weekend = dt.DayOfWeek;
-                //if ((weekend.ToString() == "Sunday") && (weekend.ToString() == "Sunday"))
-                //{
-
-                //}
-                if ((dt.DayOfWeek.ToString() != "Sunday") && (dt.DayOfWeek.ToString() != "Saturday"))
-                {
-                    dates.Add(dt);
+            {              
+                foreach (var date in dates.ToList())
+                {   
+                    foreach (var dayoff in myDaysOff)
+                    {
+                        if (dayoff == date)
+                        {
+                            dates.Remove(dayoff);
+                        }
+                    }
                 }
-                //dates.Add(dt);
-
-                //if ((dt.DayOfWeek.ToString() == "Sunday") && (dt.DayOfWeek.ToString() == "Saturday"))
-                //{
-                //    dates.Remove(dt);
-                //}
-
-                //foreach (var day in dates)
-                //{
-                //    if ((day.DayOfWeek.ToString() == "Sunday") && (day.DayOfWeek.ToString() == "Saturday"))
-                //    {
-                //        dates.Remove(day);
-                //    }
-                //}
-
-                //dates.Remove(sunday);
+                if (type == "Saturday-Non-working Company")
+                {
+                    if ((dt.DayOfWeek.ToString() != "Sunday") && (dt.DayOfWeek.ToString() != "Saturday"))
+                    {
+                        
+                        dates.Add(dt);
+                    }
+                }
+                else
+                {
+                    if (dt.DayOfWeek.ToString() != "Sunday")
+                    {
+                        dates.Add(dt);
+                    }
+                }
             }
-
+            
             var list = new List<DateTime>(dates);
-            //foreach (var day in list)
-            //{
-            //    if ((day.DayOfWeek.ToString() == "Sunday") && (day.DayOfWeek.ToString() == "Saturday"))
-            //    {
-            //        dates.Remove(day);
-            //    }
-            //}
             return View(list);
 
         }

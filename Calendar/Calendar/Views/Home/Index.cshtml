@@ -29,7 +29,14 @@
     {
         <tr>
             <td>@(++number)</td>
-            <td>@item</td>
+            <td>@item.ToString("dd-MM")</td>
+            <td>
+@*                @if(item.ToString("dd-MM") == 
+                {
+                    
+                }
+*@
+            </td>
         </tr>
     }
 </table>
