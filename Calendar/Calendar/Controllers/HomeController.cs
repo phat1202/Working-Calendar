@@ -32,7 +32,7 @@ namespace Calendar.Controllers
                 ModelState.AddModelError("", "endDate must be greater than or equal to startDate");
                 return View();
             }
-            var daysOff = _context.Holidays.First(d => d.Number != 0).holidays;
+            //var daysOff = _context.Holidays.First(d => d.Number != 0).holidays;
             for (var dt = start; dt <= end; dt = dt.AddDays(1))
             {
                 if (type == "Saturday-Non-working Company")
