@@ -20,6 +20,8 @@
 </form>
 <hr />
 <table class="table">
+    <i>*holidays(dd/MM): 01-01, 30-04, 01-05, 02-09</i>
+    <hr />
     <tr>
         <td> #</td>
         <td> Working-Days</td>
@@ -31,11 +33,6 @@
             <td>@(++number)</td>
             <td>@item.ToString("dd-MM")</td>
             <td>
-@*                @if(item.ToString("dd-MM") == 
-                {
-                    
-                }
-*@
             </td>
         </tr>
     }

@@ -22,12 +22,10 @@ namespace Calendar.Controllers
         public IActionResult Index(DateTime start, DateTime end, string type)
         {
             List<DateTime> myDaysOff = new List<DateTime>();
-            myDaysOff.Add(new DateTime(2023, 7, 22));
             myDaysOff.Add(new DateTime(2023, 1, 1));
             myDaysOff.Add(new DateTime(2023, 4, 30));
             myDaysOff.Add(new DateTime(2023, 5, 1));
             myDaysOff.Add(new DateTime(2023, 9, 2));
-            
             var dates = new List<DateTime>();
             if (end < start)
             {
@@ -37,7 +35,6 @@ namespace Calendar.Controllers
             var daysOff = _context.Holidays.First(d => d.Number != 0).holidays;
             for (var dt = start; dt <= end; dt = dt.AddDays(1))
             {
-                
                 if (type == "Saturday-Non-working Company")
                 {
                     if ((dt.DayOfWeek.ToString() != "Sunday") || (dt.DayOfWeek.ToString() != "Saturday"))
