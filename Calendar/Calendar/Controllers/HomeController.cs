@@ -21,18 +21,18 @@ namespace Calendar.Controllers
         [HttpGet]
         public IActionResult Index(DateTime start, DateTime end, string type)
         {
-            List<DateTime> myDaysOff = new List<DateTime>();
-            myDaysOff.Add(new DateTime(2023, 1, 1));
-            myDaysOff.Add(new DateTime(2023, 4, 30));
-            myDaysOff.Add(new DateTime(2023, 5, 1));
-            myDaysOff.Add(new DateTime(2023, 9, 2));
+            //List<DateTime> myDaysOff = new List<DateTime>();
+            //myDaysOff.Add(new DateTime(2023, 1, 1));
+            //myDaysOff.Add(new DateTime(2023, 4, 30));
+            //myDaysOff.Add(new DateTime(2023, 5, 1));
+            //myDaysOff.Add(new DateTime(2023, 9, 2));
             var dates = new List<DateTime>();
             if (end < start)
             {
                 ModelState.AddModelError("", "endDate must be greater than or equal to startDate");
                 return View();
             }
-            //var daysOff = _context.Holidays.First(d => d.Number != 0).holidays;
+            var daysOff = _context.Holidays.Select(d => d.holidays).ToList();
             for (var dt = start; dt <= end; dt = dt.AddDays(1))
             {
                 if (type == "Saturday-Non-working Company")
@@ -40,16 +40,17 @@ namespace Calendar.Controllers
                     if ((dt.DayOfWeek.ToString() != "Sunday") && (dt.DayOfWeek.ToString() != "Saturday"))
                     {
                         dates.Add(dt);
-                        foreach (var dayoff in myDaysOff)
-                        {    
+                        
+                        foreach (DateTime dayoff in daysOff)
+                        {
                             if (dayoff.DayOfWeek.ToString() == "Saturday")
                             {
-                                var nextday = dayoff.AddDays(1);
-                                if(nextday.DayOfWeek.ToString() == "Sunday")
+                                DateTime nextday = dayoff.AddDays(1);
+                                if (nextday.DayOfWeek.ToString() == "Sunday")
                                 {
-                                    foreach(var  dayoff2 in myDaysOff)
+                                    foreach (var dayoff2 in myDaysOff)
                                     {
-                                        if(nextday == dayoff2 )
+                                        if (nextday == dayoff2)
                                         {
                                             var nextdaysOff2 = nextday.AddDays(2);
                                             dates.Remove(nextdaysOff2);
@@ -65,7 +66,7 @@ namespace Calendar.Controllers
                                 var rostered_dayOff = dayoff.AddDays(2);
                                 dates.Remove(rostered_dayOff);
                             }
-                            if(dayoff.DayOfWeek.ToString() == "Sunday")
+                            if (dayoff.DayOfWeek.ToString() == "Sunday")
                             {
                                 var rostered_dayOff = dayoff.AddDays(1);
                                 dates.Remove(rostered_dayOff);
