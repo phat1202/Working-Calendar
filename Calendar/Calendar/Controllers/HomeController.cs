@@ -48,7 +48,7 @@ namespace Calendar.Controllers
                                 DateTime nextday = dayoff.AddDays(1);
                                 if (nextday.DayOfWeek.ToString() == "Sunday")
                                 {
-                                    foreach (var dayoff2 in myDaysOff)
+                                    foreach (var dayoff2 in daysOff)
                                     {
                                         if (nextday == dayoff2)
                                         {
@@ -79,7 +79,7 @@ namespace Calendar.Controllers
                     if (dt.DayOfWeek.ToString() != "Sunday")
                     {
                         dates.Add(dt);
-                        foreach (var dayoff in myDaysOff)
+                        foreach (DateTime dayoff in daysOff)
                         {
                             if (dayoff.DayOfWeek.ToString() == "Sunday")
                             {
@@ -91,7 +91,7 @@ namespace Calendar.Controllers
                 }
                 foreach (var date in dates.ToList())
                 {
-                    foreach (var dayoff in myDaysOff)
+                    foreach (DateTime dayoff in daysOff)
                     {
                         if (dayoff.Day == date.Day && dayoff.Month == date.Month)
                         {
