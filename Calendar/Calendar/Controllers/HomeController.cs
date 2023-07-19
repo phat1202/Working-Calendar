@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Globalization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Calendar.Controllers
@@ -26,6 +27,16 @@ namespace Calendar.Controllers
             //myDaysOff.Add(new DateTime(2023, 4, 30));
             //myDaysOff.Add(new DateTime(2023, 5, 1));
             //myDaysOff.Add(new DateTime(2023, 9, 2));
+            ////;
+            ///
+
+            var LunarCalendar = new ChineseLunisolarCalendar();
+            var SolarDate = new DateTime(2024, 3, 10, new ChineseLunisolarCalendar());
+            //var yyyy = LunarCalendar.GetYear(SolarDate);
+            //var MM = LunarCalendar.GetMonth(SolarDate); 
+            //var dd = LunarCalendar.GetDayOfMonth(SolarDate);
+
+            ////
             var dates = new List<DateTime>();
             if (end < start)
             {
