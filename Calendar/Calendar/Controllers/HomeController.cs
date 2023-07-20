@@ -44,17 +44,35 @@ namespace Calendar.Controllers
                 return View();
             }
             var daysOff = _context.Holidays.Select(d => d.holidays).ToList();
+          
             for (var dt = start; dt <= end; dt = dt.AddDays(1))
             {
                 if (type == "Saturday-Non-working Company")
                 {
+                    // tính ngày nghỉ bù
+                    // công ty đi nghỉ làm thứ 7
                     if ((dt.DayOfWeek.ToString() != "Sunday") && (dt.DayOfWeek.ToString() != "Saturday"))
                     {
                         dates.Add(dt);
                         
                         foreach (DateTime dayoff in daysOff)
                         {
-                            if (dayoff.DayOfWeek.ToString() == "Saturday")
+                            if (dayoff.Month == 3 && dayoff.Day == 10)
+                            {
+                                var GioToHungVuongDuongLich = new DateTime(2024, dayoff.Month, dayoff.Day, new ChineseLunisolarCalendar());
+                                if (GioToHungVuongDuongLich.DayOfWeek.ToString() == "Saturday")
+                                {
+                                    DateTime nextday = GioToHungVuongDuongLich.AddDays(2);
+                                    dates.Remove(nextday);
+                                }
+                                else if (GioToHungVuongDuongLich.DayOfWeek.ToString() == "Sunday")
+                                {
+                                    DateTime nextday = GioToHungVuongDuongLich.AddDays(1);
+                                    dates.Remove(nextday);
+                                }
+                            }
+                            //////
+                            else if (dayoff.DayOfWeek.ToString() == "Saturday")
                             {
                                 DateTime nextday = dayoff.AddDays(1);
                                 if (nextday.DayOfWeek.ToString() == "Sunday")
@@ -77,7 +95,7 @@ namespace Calendar.Controllers
                                 var rostered_dayOff = dayoff.AddDays(2);
                                 dates.Remove(rostered_dayOff);
                             }
-                            if (dayoff.DayOfWeek.ToString() == "Sunday")
+                            else if (dayoff.DayOfWeek.ToString() == "Sunday")
                             {
                                 var rostered_dayOff = dayoff.AddDays(1);
                                 dates.Remove(rostered_dayOff);
@@ -85,6 +103,8 @@ namespace Calendar.Controllers
                         }
                     }
                 }
+                // tính ngày nghỉ bù
+                // công ty đi làm thứ 7
                 else
                 {
                     if (dt.DayOfWeek.ToString() != "Sunday")
@@ -92,7 +112,16 @@ namespace Calendar.Controllers
                         dates.Add(dt);
                         foreach (DateTime dayoff in daysOff)
                         {
-                            if (dayoff.DayOfWeek.ToString() == "Sunday")
+                            if (dayoff.Month == 3 && dayoff.Day == 10)
+                            {
+                                var GioToHungVuongDuongLich = new DateTime(DateTime.Now.Year, 3, 10, new ChineseLunisolarCalendar());
+                                if (GioToHungVuongDuongLich.DayOfWeek.ToString() == "Sunday")
+                                {
+                                    DateTime nextday = GioToHungVuongDuongLich.AddDays(1);
+                                    dates.Remove(nextday);
+                                }
+                            }
+                            else if (dayoff.DayOfWeek.ToString() == "Sunday")
                             {
                                 var rostered_dayOff = dayoff.AddDays(1);
                                 dates.Remove(rostered_dayOff);
@@ -100,11 +129,17 @@ namespace Calendar.Controllers
                         }
                     }
                 }
+                // nghỉ làm!
                 foreach (var date in dates.ToList())
                 {
                     foreach (DateTime dayoff in daysOff)
                     {
-                        if (dayoff.Day == date.Day && dayoff.Month == date.Month)
+                        if (dayoff.Month == 3 && dayoff.Day == 10)
+                        {
+                            var GioToHungVuongDuongLich = new DateTime(DateTime.Now.Year, dayoff.Month, dayoff.Day, new ChineseLunisolarCalendar());
+                            dates.Remove(GioToHungVuongDuongLich);
+                        }
+                        else if (dayoff.Day == date.Day && dayoff.Month == date.Month)
                         {
                             dates.Remove(date);
 
