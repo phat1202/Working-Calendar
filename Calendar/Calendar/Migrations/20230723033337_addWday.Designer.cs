@@ -3,6 +3,7 @@ using System;
 using Calendar.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Calendar.Migrations
 {
     [DbContext(typeof(CalendarContext))]
-    partial class CalendarContextModelSnapshot : ModelSnapshot
+    [Migration("20230723033337_addWday")]
+    partial class addWday
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,29 +34,6 @@ namespace Calendar.Migrations
                     b.HasKey("Number");
 
                     b.ToTable("Holidays");
-                });
-
-            modelBuilder.Entity("Calendar.Models.WorkingDay", b =>
-                {
-                    b.Property<int?>("Number")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("IsHoliday")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("Selection")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("Weekend")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Number");
-
-                    b.ToTable("workingDays");
                 });
 #pragma warning restore 612, 618
         }

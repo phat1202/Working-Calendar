@@ -3,6 +3,7 @@ using System;
 using Calendar.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Calendar.Migrations
 {
     [DbContext(typeof(CalendarContext))]
-    partial class CalendarContextModelSnapshot : ModelSnapshot
+    [Migration("20230723042630_add_workingDays_1")]
+    partial class add_workingDays_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,9 +49,6 @@ namespace Calendar.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("Selection")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("Weekend")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Number");

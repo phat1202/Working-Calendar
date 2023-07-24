@@ -19,23 +19,52 @@
     </button>
 </form>
 <hr />
-<table class="table">
-    <i>*holidays(dd/MM): 01-01, 30-04, 01-05, 02-09</i>
-    <br />
-    <i>*Dù ai đi ngược về xuôi nhớ ngày Giỗ Tổ mùng 10 tháng 3r</i>
-    <hr />
+<i>*holidays(dd/MM): 01-01, 30-04, 01-05, 02-09</i>
+<br />
+<i>*Dù ai đi ngược về xuôi nhớ ngày Giỗ Tổ mùng 10 tháng 3r</i>
+<hr />
+<table class="table table-striped">
+
+
     <tr>
         <td> #</td>
-        <td> Working-Days</td>
+        <td> Working Day</td>
+        <td> Dayoff</td>
+        <td> </td>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>@(++number)</td>
-            <td>@item.ToString("dd-MM")</td>
+            <td>@item.Date.ToString("dd-MM")</td>
             <td>
+                @if (item.IsHoliday == true)
+                {
+
+                    <p> Holiday</p>
+                }
+                else if (item.Selection == true)
+                {
+                    <p> Rostered Dayoff</p>
+                }
+
             </td>
+            <td>
+                @if (item.Weekend == true)
+                {
+                    <p> Weekend</p>
+                }
+                @*else if(item.Weekend == true)
+            {
+            <p> Weekend</p>
+            }
+            else if(item.Selection == true)
+            {
+            <p> Ro</p>
+            }*@
+            </td>
+
         </tr>
     }
 </table>

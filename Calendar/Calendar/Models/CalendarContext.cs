@@ -8,6 +8,7 @@ namespace Calendar.Models
         { }
         public CalendarContext(DbContextOptions<CalendarContext> options) : base(options) { }
         public DbSet<Holiday> Holidays { get; set; }
+        public DbSet<WorkingDay> workingDays { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
         {
